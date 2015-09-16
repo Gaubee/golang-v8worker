@@ -51,4 +51,4 @@ WORKDIR "$GOPATH/src/github.com/ry/v8worker"
 RUN make \
 	&& make install
 
-RUN chmod -R gouser /go
+RUN chown -R gouser /go
