@@ -51,4 +51,5 @@ WORKDIR "$GOPATH/src/github.com/ry/v8worker"
 RUN make \
 	&& make install
 
+RUN rm -rf /go/src/github.com/ry/v8worker/v8
 RUN chown -R gouser /go
