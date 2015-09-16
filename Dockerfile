@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
 		lbzip2 \
 		lsb-release \
 		gcc \
-        g++ \
+		g++ \
 		clang \
 		pkg-config \
 		libc6-dev \
@@ -50,3 +50,5 @@ RUN git clone https://github.com/ry/v8worker src/github.com/ry/v8worker
 WORKDIR "$GOPATH/src/github.com/ry/v8worker"
 RUN make \
 	&& make install
+
+RUN chmod -R gouser /go
