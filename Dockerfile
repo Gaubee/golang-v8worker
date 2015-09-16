@@ -52,4 +52,6 @@ RUN make \
 	&& make install
 
 RUN rm -rf /go/src/github.com/ry/v8worker/v8
+
+USER root
 RUN chown -R gouser /go
