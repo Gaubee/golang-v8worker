@@ -51,7 +51,7 @@ WORKDIR "$GOPATH/src/github.com/ry/v8worker"
 RUN make \
 	&& make install
 
-# RUN rm -rf $DEPOT_TOOLS
+RUN rm -rf $DEPOT_TOOLS
 
 USER root
 RUN chown -R gouser /go
