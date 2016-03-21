@@ -24,6 +24,9 @@ RUN apt-get update && apt-get install -y \
 	&& rm -rf /var/lib/apt/lists/*
 
 ENV DEPOT_TOOLS $HOME/depot_tools
+
+# fetch need create file
+ENV HOME /home/gouser
 WORKDIR "$HOME"
 
 # get chromium depot_tools
@@ -50,6 +53,7 @@ RUN rm -rf $DEPOT_TOOLS
 
 USER root
 RUN chown -R gouser /go
+ENV HOME /root
 
 # open bash
 CMD ["sh"]
