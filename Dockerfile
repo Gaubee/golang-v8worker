@@ -6,7 +6,7 @@
 #
 
 # Pull base image.
-FROM golang:onbuild
+FROM golang
 MAINTAINER Gaubee <gaubeebangeel@gmail.com>
 
 # Install Build Env
