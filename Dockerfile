@@ -30,7 +30,7 @@ ENV GOLANG_DOWNLOAD_SHA256 5470eac05d273c74ff8bac7bef5bad0b5abbd1c4052efbdbc8db4
 
 RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
 	&& echo "$GOLANG_DOWNLOAD_SHA256  golang.tar.gz" | sha256sum -c - \
-	&& tar xvzf golang.tar.gz -C /usr/local \
+	&& tar xzf golang.tar.gz -C /usr/local \
 	&& rm golang.tar.gz
 
 ENV GOROOT /usr/local/go
