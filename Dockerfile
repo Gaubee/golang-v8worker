@@ -53,4 +53,4 @@ RUN chown -R gouser /go
 ENV HOME /root
 
 # open bash
-CMD ["sh"]
+CMD ["bash"]
