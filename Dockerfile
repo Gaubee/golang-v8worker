@@ -23,10 +23,10 @@ RUN apt-get update && apt-get install -y \
 		--no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
-ENV DEPOT_TOOLS $HOME/depot_tools
-
 # fetch need create file
 ENV HOME /home/gouser
+ENV DEPOT_TOOLS $HOME/depot_tools
+
 WORKDIR "$HOME"
 
 # get chromium depot_tools
@@ -34,11 +34,11 @@ RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $
 
 # go get v8worker: download & compile V8 & go install v8worker
 RUN chmod -R 777 "$GOPATH"
-WORKDIR "$GOPATH"
 
 RUN useradd -m gouser
 USER gouser
 
+WORKDIR "$GOPATH"
 RUN git clone https://github.com/ry/v8worker src/github.com/ry/v8worker
 WORKDIR "$GOPATH/src/github.com/ry/v8worker"
 # build and run test && compile to $GOPATH/pkg/linux_amd64/github.com/ry/v8worker.a
