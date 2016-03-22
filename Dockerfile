@@ -33,7 +33,7 @@ WORKDIR "$HOME"
 RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $DEPOT_TOOLS
 
 # go get v8worker: download & compile V8 & go install v8worker
-chmod -R 777 "$GOPATH"
+RUN chmod -R 777 "$GOPATH"
 WORKDIR "$GOPATH"
 
 RUN useradd -m gouser
