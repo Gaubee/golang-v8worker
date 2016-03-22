@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
 		--no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
+#Install GoLang
 ENV GOLANG_VERSION 1.6
 ENV GOLANG_DOWNLOAD_URL https://storage.googleapis.com/golang/go$GOLANG_VERSION.linux-amd64.tar.gz
 ENV GOLANG_DOWNLOAD_SHA256 5470eac05d273c74ff8bac7bef5bad0b5abbd1c4052efbdbc8db45332e836b0b
@@ -34,22 +35,22 @@ RUN curl -fsSL "$GOLANG_DOWNLOAD_URL" -o golang.tar.gz \
 
 ENV GOPATH /go
 ENV GOROOT /usr/local/go
-ENV PATH $GOPATH/bin:$GOROOT/bin:$PATH
+RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
+WORKDIR "$GOPATH"
+
+# go get v8worker: download & compile V8 & go install v8worker
+RUN useradd -m gouser
+USER gouser
 
 # fetch need create file
 ENV HOME /home/gouser
 ENV DEPOT_TOOLS $HOME/depot_tools
+ENV PATH $GOPATH/bin:$GOROOT/bin:$PATH:$DEPOT_TOOLS
 
 WORKDIR "$HOME"
 
 # get chromium depot_tools
 RUN git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git $DEPOT_TOOLS
-
-# go get v8worker: download & compile V8 & go install v8worker
-RUN chmod -R 777 "$GOPATH"
-
-RUN useradd -m gouser
-USER gouser
 
 WORKDIR "$GOPATH"
 RUN git clone https://github.com/ry/v8worker src/github.com/ry/v8worker
